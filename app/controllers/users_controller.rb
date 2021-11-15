@@ -1,10 +1,8 @@
 class UsersController < ApplicationController
   def index
-    @pagy, @users = pagy(User.order(id: :desc), items: 25)
   end
   
   def show
-    @user = User.find(params[:id])
   end
   
   def new
@@ -17,7 +15,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id #ここを追加
       flash[:success] = 'ユーザを登録しました。'
-      redirect_to @user
+      redirect_to "/"
     else
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       render :new
